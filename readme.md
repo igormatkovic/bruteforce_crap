@@ -82,7 +82,7 @@ to get the real ip address and replace it with what ever you feel most comfortab
 
 
 ## Nginx Location Filter Set Up
-
+ 
 Next we have to redirect all the fake locations to that file.
 ```bash
     # The usual suspects
