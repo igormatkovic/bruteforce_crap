@@ -84,6 +84,12 @@ to get the real ip address and replace it with what ever you feel most comfortab
 ## Nginx Location Filter Set Up
  
 Next we have to redirect all the fake locations to that file.
+
+To make it easier to share this code between multiple sites we will create a include file  
+
+Create a folder and a file **/etc/nginx/includes/wordpresscrap**  
+
+add the following in there.
 ```bash
     # The usual suspects
     location ~ ^/(wp-admin|phpmyadmin|pma|webmin|myadmin) {
@@ -103,6 +109,19 @@ Next we have to redirect all the fake locations to that file.
 ```
 
 
+Now just add the included file into your nginx sites conf.
+
+```sh
+server {
+    listen 80;
+    server_name mydomain;
+    ...
+    
+    include includes/wordpresscrapp;
+    
+```
+
+
 Restart fail2ban and nginx to take affect
 
 
@@ -118,7 +137,7 @@ To test out does it all work.
 To thest his its better if you use a different server. Because if the test works you will block your self out!
 
 
-```sh
+``sh
 curl -X POST -d "username=something" http://mydomain.com/wp-login.php
 ```
 
